@@ -56,7 +56,6 @@ impl BlockTrait for BlockSigmoid {
         
         // vowpal compatibility
         if wsum.is_nan() {
-            eprintln!("NAN prediction in example {}, forcing 0.0", fb.example_number);
             return (logistic(0.0), 0.0);
         } else if wsum < -50.0 {
             return (logistic(-50.0), 0.0);
@@ -66,7 +65,6 @@ impl BlockTrait for BlockSigmoid {
 
         let prediction_probability = logistic(wsum);
         let general_gradient = (fb.label - prediction_probability) * fb.example_importance;
-        //println!("General gradient: {}", general_gradient);
         (prediction_probability, general_gradient)
     }
 
